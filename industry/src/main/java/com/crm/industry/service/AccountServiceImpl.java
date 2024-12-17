@@ -5,6 +5,7 @@ import com.crm.industry.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,6 +51,14 @@ public class AccountServiceImpl implements AccountService {
             }
         }
         return null;
+    }
+    @Override
+    public List<Account> get(){
+        List<Account> accounts = accountRepository.findAll();
+        if(accounts.isEmpty()){
+            return null;
+        }
+        return accounts;
     }
 
     @Override
