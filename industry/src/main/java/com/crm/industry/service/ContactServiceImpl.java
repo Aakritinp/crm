@@ -5,10 +5,10 @@ import com.crm.industry.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-
 public class ContactServiceImpl implements ContactService {
     @Autowired
 
@@ -42,6 +42,15 @@ public class ContactServiceImpl implements ContactService {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Contact> get(){
+        List<Contact> contacts = contactRepository.findAll();
+        if(contacts.isEmpty()){
+            return null;
+        }
+        return contacts;
     }
 
     @Override

@@ -12,7 +12,7 @@ public interface AccountService {
 
     Account get(String id);
 
-    List<Account> get();
+    List<Account> get() throws Exception;
 
     void delete(String id);
 }

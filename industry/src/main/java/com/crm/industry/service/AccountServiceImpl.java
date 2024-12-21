@@ -3,6 +3,7 @@ package com.crm.industry.service;
 import com.crm.industry.model.Account;
 import com.crm.industry.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class AccountServiceImpl implements AccountService {
         return account;
     }
 
+    @Cacheable(value = "GET_ACCOUNT", key = "id")
     @Override
     public Account get(String id) {
         if (id != null) {
@@ -52,14 +54,20 @@ public class AccountServiceImpl implements AccountService {
         }
         return null;
     }
+
     @Override
-    public List<Account> get(){
-        List<Account> accounts = accountRepository.findAll();
-        if(accounts.isEmpty()){
-            return null;
+    public List<Account> get() throws Exception {
+        try {
+            List<Account> accounts = accountRepository.findAll();
+            if (accounts.isEmpty()) {
+                return null;
+            }
+            return accounts;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
-        return accounts;
     }
+
 
     @Override
     public void delete(String id) {

@@ -3,9 +3,11 @@ package com.crm.industry.service;
 import com.crm.industry.model.Opportunity;
 import com.crm.industry.repository.OpportunityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class OpportunityServiceImpl implements OpportunityService {
     @Autowired
     private OpportunityRepository opportunityRepository;
